@@ -71,6 +71,8 @@ This is an IIR filter, which means that as time goes on old values matter less a
 
 You will need to tune IIR_AMOUNT to your liking, higher values will be more damped, lower values will be faster to respond.
 
+For removing DC offset, or computing high-pass, take your value, and subtract the filtered value.
+
 ```c
 	#define IIR_AMOUNT 8
 	static int ifilt; // Accumulates the average.
@@ -86,6 +88,42 @@ You will need to tune IIR_AMOUNT to your liking, higher values will be more damp
 	int filtered_value = ifilt>>IIR_AMOUNT;
 ```
 ![ifilt](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/ifilt.png?raw=true)
+
+### Goertzel's sinewave / DFT.
+
+A lot of times, you will want to use a sinewave, or need to do DFT for specific tone.
+
+And sin/cos may not be fast.  Well, good news, goertzels is to the rescue.  You can
+generate a sin/cos without any sin or cos!
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+	const float omegaPerSample = 0.015708; // pi / 200
+	const int numSamples = 400; // enough to go from 0 to 2pi
+
+	float coeff = 2 * cos( omegaPerSample );
+	int i;
+
+	// TRICKY: When you want a sinewave, initialize with omegaPerSample.  This
+	// is crucial.  The initial state will have massive consequences.
+	float sprev = omegaPerSample;
+	float sprev2 = 0;
+	for( i = 0; i < numSamples; i++ )
+	{
+		float s = coeff * sprev - sprev2; // Here is where the magic happens.
+		sprev2 = sprev;
+		sprev = s;
+		printf( "%f\n", s ); 
+	}
+}
+```
+
+![goertzels](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/goertzels0.png?raw=true)
+
 
 ## Linux
 
