@@ -44,6 +44,11 @@ Single-file headers I wrote:
 | [rtgz-tinf-util](https://github.com/cnlohr/rtgz-tinf-util) | Custom deflate decompressor, and custom compressor for targeting tiny decode windows | [tinf_sf.h](https://raw.githubusercontent.com/cnlohr/rtgz-tinf-util/master/tinf_sf.h) |
 | [csgp4](https://github.com/cnlohr/csgp4) | SGP4 Orbital Mechanics Header-Only file (portable to HLSL) for computing satellite positions at times | [csgp4.h](https://raw.githubusercontent.com/cnlohr/csgp4/master/csgp4.h) |
 
+## Concepts
+
+TODO
+ * Two's Compliemnt
+ * Floating Point
 
 ## Embedded / C
 
@@ -115,7 +120,7 @@ void ProductDemoPrecise()
 	// result down by 16 to get your final answer in the
 	// same fixed-point system you're in.
 
-	int a = 132345;  // 2.019424438 (number / 65536 (or 2^16))
+	int a = 132345;  // 2.019424438
 	int b = 7491;    // 0.114303589
 
 	int product = (a * b + 32768)>>16;
@@ -128,7 +133,7 @@ void ProductDemoPrecise()
 
 void ProductDemoOverflow()
 {
-	int a = 132345;  // 2.019424438 (number / 65536 (or 2^16))
+	int a = 132345;  // 2.019424438
 	int big_b = 4442414; //67.785858154
 	int product2 = (a * big_b)>>16; // This will overflow.
 
@@ -145,7 +150,7 @@ void ProductDemoOverflow()
 
 void FixedNatural()
 {
-	int a = 132345;  // 2.019424438 (number / 65536 (or 2^16))
+	int a = 132345;  // 2.019424438
 	int multiplyby = 18;
 
 	int product = a * multiplyby;
@@ -178,12 +183,6 @@ int main()
 	Division();
 }
 ```
-
-## Concepts
-
-TODO
- * Two's Compliemnt
- * Floating Point
 
 ## DSP
 
