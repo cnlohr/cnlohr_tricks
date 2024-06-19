@@ -56,6 +56,7 @@ Single-file headers I wrote:
 TODO
  * Two's Compliemnt
  * Floating Point
+ * Heap/Stack/Global memory.
 
 ## Embedded / C
 
