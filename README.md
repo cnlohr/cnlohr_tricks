@@ -2,7 +2,9 @@
 
 The contents of this readme is public domain where possible. And if licensing is required, it may be licensed under the MIT, NewBSD, ISC, Zlib, MIT0 or CC0 licenses.
 
-## Useful single-file header libraries
+## Links and Libraries
+
+### Useful single-file header libraries
 
 Included are the URLs directly to the headers themselves.  You can "Copy Link Location" then `wget` or `curl` it into where you need it.
 
@@ -43,6 +45,11 @@ Single-file headers I wrote:
 | [heatshrink-sfh](https://github.com/cnlohr/heatshrink-sfh) | Very stripped down implementation of the heatshrink LVSS decompression algorithm | [heatshrink_sf.h](https://raw.githubusercontent.com/cnlohr/heatshrink-sfh/master/heatshrink_sf.h) |
 | [rtgz-tinf-util](https://github.com/cnlohr/rtgz-tinf-util) | Custom deflate decompressor, and custom compressor for targeting tiny decode windows | [tinf_sf.h](https://raw.githubusercontent.com/cnlohr/rtgz-tinf-util/master/tinf_sf.h) |
 | [csgp4](https://github.com/cnlohr/csgp4) | SGP4 Orbital Mechanics Header-Only file (portable to HLSL) for computing satellite positions at times | [csgp4.h](https://raw.githubusercontent.com/cnlohr/csgp4/master/csgp4.h) |
+
+### Links to other neat documents
+
+ * [dwillmore's bit math](https://github.com/dwillmore/bitmath)
+ * [Stanford bit twiddling hacks](https://graphics.stanford.edu/~seander/bithacks.html)
 
 ## Concepts
 
