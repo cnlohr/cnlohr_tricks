@@ -136,9 +136,9 @@ int main()
 	printf( "%f\n", power );
 }
 ```
-### Goertzel's DFT
-
 ![goertzels0](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/goertzels0.png?raw=true)
+
+### Goertzel's DFT
 
 Below is an example using Goertzel's Algorithm to extract the phase and magnitude of a sinewave of an incoming signal, against a specific target frequency. If you think this is magical, that makes two of us.
 
