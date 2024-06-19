@@ -150,8 +150,7 @@ int main()
 	const float omegaPerSample = 0.015708; // pi / 200
 	const int numSamples = 400; // enough to go from 0 to 2pi
 
-
-	for( float phaseOffsetOfSignal = 0; phaseOffsetOfSignal < 3.1415926*2.0; phaseOffsetOfSignal += 0.01 )
+	for( float phase = 0; phase < 3.1415926*2.0; phase += 0.01 )
 	{
 		float coeff = 2 * cos( omegaPerSample );
 		int i;
@@ -163,7 +162,7 @@ int main()
 		for( i = 0; i < numSamples; i++ )
 		{
 			// If you wanted to do a DFT, set SAMPLE to your incoming sample.
-			float SAMPLE = sin( phaseOffsetOfSignal + i * omegaPerSample );
+			float SAMPLE = sin( phase + i * omegaPerSample );
 
 			// Here is where the magic happens.
 			float s = SAMPLE + coeff * sprev - sprev2;
