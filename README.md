@@ -114,7 +114,8 @@ int main()
 	float sprev2 = 0;
 	for( i = 0; i < numSamples; i++ )
 	{
-		float s = coeff * sprev - sprev2; // Here is where the magic happens.
+		float SAMPLE = 1.0; // If you wanted to do a DFT, set SAMPLE to your incoming sample.
+		float s = SAMPLE * coeff * sprev - sprev2; // Here is where the magic happens.
 		sprev2 = sprev;
 		sprev = s;
 		printf( "%f\n", s ); 
