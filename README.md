@@ -89,6 +89,104 @@ For removing DC offset, or computing high-pass, take your value, and subtract th
 ```
 ![ifilt](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/ifilt.png?raw=true)
 
+### Fixed Point Math
+
+So, you want to do math, and you feel like you want to use floating point.  Maybe you don't.  Fixed point math gives you MORE accuracy with the same number of bits, and
+in most situations (especially embedded, even when the processor has an FPU) goes faster than floating point math.
+
+Here is a demo program showing many principles of fixed point math:
+
+```c
+#include <stdio.h>
+
+void SumDemo()
+{
+	// Assumed a fixed point of 16-bits . 16-bits
+	int a = 132345;  // 2.019424438 (number / 65536 (or 2^16))
+	int b = 7491;    // 0.114303589
+
+	int sum = a + b;
+	printf( "Sum: %f\n", sum/65536.0 ); //2.133728 (correct)
+}
+
+void ProductDemoPrecise()
+{
+	// When multiplying fixed point numbers, shift the
+	// result down by 16 to get your final answer in the
+	// same fixed-point system you're in.
+
+	int a = 132345;  // 2.019424438 (number / 65536 (or 2^16))
+	int b = 7491;    // 0.114303589
+
+	int product = (a * b + 32768)>>16;
+
+	// Adding 32768 fixes rounding, but most of the time you
+	// don't actually need it.
+
+	printf( "Product: %f\n", product/65536.0 ); //0.230820 (correct)
+}
+
+void ProductDemoOverflow()
+{
+	int a = 132345;  // 2.019424438 (number / 65536 (or 2^16))
+	int big_b = 4442414; //67.785858154
+	int product2 = (a * big_b)>>16; // This will overflow.
+
+	printf( "Product 2: %f\n", product2/65536.0 ); //-0.111588 (WRONG!)
+
+	// At the cost of a tiny bit of imprecision, you can shift down before.
+	int product3 = (a>>8) * (big_b>>8);
+
+	// You can tune where the >>'s go, as long as they add up to 16
+	// and no one calculation overflows.
+
+	printf( "Product 3: %f\n", product3/65536.0 ); //136.629456 (Correct)
+}
+
+void FixedNatural()
+{
+	int a = 132345;  // 2.019424438 (number / 65536 (or 2^16))
+	int multiplyby = 18;
+
+	int product = a * multiplyby;
+
+	//36.349640 (correct)
+	printf( "Product of Fixed + Natural = %f\n", product / 65536.0 );
+}
+
+void Division()
+{
+	// Division is exactly like multiplication just in reverse.
+	int a = 132345;  // 2.019424438
+	int b = 7491;    // 0.114303589
+	int division = ((a<<12) / (b>>4));
+
+	// Try to:
+	//  1 - avoid overflows
+	//  2 - maximize the precision of the numerator
+	//  3 - shifts must add up to 16 (numerator is +, denominator is -)
+
+	printf( "Division: %f\n", division/65536.0 ); // 17.674072 (Close)
+}
+
+int main()
+{
+	SumDemo();
+	ProductDemoPrecise();
+	ProductDemoOverflow();
+	FixedNatural();
+	Division();
+}
+```
+
+## Concepts
+
+TODO
+ * Two's Compliemnt
+ * Floating Point
+
+## DSP
+
 ### Goertzel's Sinewave
 
 A lot of times, you will want to use a sinewave, or need to do DFT for specific tone.
