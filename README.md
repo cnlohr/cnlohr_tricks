@@ -89,7 +89,7 @@ For removing DC offset, or computing high-pass, take your value, and subtract th
 ```
 ![ifilt](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/ifilt.png?raw=true)
 
-### Goertzel's sinewave / DFT.
+### Goertzel's Sinewave
 
 A lot of times, you will want to use a sinewave, or need to do DFT for specific tone.
 
@@ -136,10 +136,13 @@ int main()
 	printf( "%f\n", power );
 }
 ```
+### Goertzel's DFT
 
 ![goertzels0](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/goertzels0.png?raw=true)
 
 Below is an example using Goertzel's Algorithm to extract the phase and magnitude of a sinewave of an incoming signal, against a specific target frequency. If you think this is magical, that makes two of us.
+
+This is performing a DFT.  If all you are looking for is a single value, DFTs are massively faster than FFTs.
 
 ```c
 #include <stdio.h>
