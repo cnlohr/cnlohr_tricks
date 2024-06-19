@@ -291,7 +291,7 @@ int main()
 
 ![goertzels1](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/goertzels1.png?raw=true)
 
-## Linux
+## Linux and Development
 
 ### My program segfaulted, why?
 
@@ -303,6 +303,36 @@ bt
 ```
 
 To get a backtrace of the most recently crashed program.
+
+### How do I Makefile?
+
+A basic Makefile would be:
+
+```make
+all : test
+
+test : test.c
+	gcc -o test test.c
+
+clean :
+	rm -rf test
+```
+
+Makefiles are just:
+
+```makefile
+thing_you_make : things needed to make it
+	commands you execute to
+	make the thing
+```
+
+There are some shortcuts in Makefiles.  Like:
+
+ * `$@` replace with `thing_you_make`
+ * `$^` replace with `things needed to make it`
+ * `$<` replace with `things` (or the first thing in the things needed).
+
+That's honestly all you need to know for now.
 
 ### How to make system calls in C, when programming without a standard library.
 
