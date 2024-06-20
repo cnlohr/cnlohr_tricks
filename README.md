@@ -114,13 +114,40 @@ Depending on the type size, you have different constraints. Here is a quick tabl
 |  32 | -2,147,483,648 | 2,147,483,647 | 0 | 4,294,967,296 |
 |  64 | -9.223372037×10¹⁸ | 9.223372037×10¹⁸ | 0 | 1.844674407×10¹⁹ |
 
+### Floating-point representation
+
+[IEEE754](https://en.wikipedia.org/wiki/IEEE_754) is a way of representing numerical values in 32- or 64- bits (`float` or `double`) so that you don't need to deal with all the fixed point stuff outlined in [Fixed Point Math](#fixed-point-math). It does this by using something like [Scientific Notation](https://en.wikipedia.org/wiki/Scientific_notation). 
+
+But, instead of using base-10, it uses binary.  So it has a sign (plus or minus), an exponent (8 bits) and a mantissa (23 bits), or 1/11/52 for `double`-precision floating pint.
+
+A float value is organized as follows:
+
+`SEEEEEEEEMMMMMMMMMMMMMMMMMMMMMMM`
+
+So, for instance, it can represent small numbers with precision, like 0.0001 and 0.00010001, but, if you are using a number like 10000.0, and try to add 0.000001, it will still be 10000.0.  This is called 'floating point error'.
+
+It gets worse with bigger numbers, for instance, if you take 16777214.0f (2^24-2), and add 1, you get 16777215.0f, if you add 1 again, you get 16777216.0f, but if you take that and add 1, you still get `16777214.0f`.  You can add 1 an unlimited number of times, but it will still be the same number.  It doesn't increase until you add 2 to it.
+
+Many smaller processors do not have hardware support for floating-ppint, and if you use `float` on an AVR, it's going to emulate all the float values in software with integer math, which will cause it to go VERY slowly, and use a LOT of flash, one alternative is to use the afore-mentioned [Fixed Point Math](#fixed-point-math).  And even on processors or systems like GPUs with `double` prcision hardware, they will run much slower.
+
+### BAMs
+
+BAMs are a way of representing rotations that effectively use natural integer overflows, as well as fully utilizing a binary space, which is great for storing or transmitting rotations.  There is no standard for how many bits BAMs use to encode rotation, but using fewer bits will make for chunkier rotations.
+
+The idea is you split a circule of rotation up into equal-rotation segments equal to the number if discrete values your type can represent.  For instance, if you made it so you can define 256 unique rotations amounts, you would say the rotation goes from "0 to 255 BAMs".  
+
+BAMs work the exact same in signed and unsighed numbers.  For instance, a circle from `0 to 255 BAMs` if converted to an `int8_t` would go from -128 to 127 BAMs.  Conveniently, wrapping over from 127 to -128 BAMs, the rotation expressed by -128 BAMs is identical to that of 128 BAMs.  So you can typecast freely.
+
+Computationally, BAMs are very powerful because normal wrap-around logic, such as given one angle, 15°, what is the difference in angle to 300°?  Normally you'd need to check if you wrapped over 360°, then subtract 360°, etc.  But with BAMs, you can just subtract, and typecast.  Say 15 BAMs to 250 BAMs?  `(int8_t)(15-250) = 21`  or `(int8_t)(250-15) = -21`.  
+
 ### TODO
 
- * Two's Compliemnt
- * Floating Point
+
+ * Clock/Timestamp Wrapping
  * Heap/Stack/Global memory.
  * Virtual Clocks
  * Clock Wrapping
+ * BAMs
  * Unicode
 
 ## Embedded / C
@@ -369,6 +396,23 @@ bt
 ```
 
 To get a backtrace of the most recently crashed program.
+
+### How do I run in gdb with command-line parameters
+
+```sh
+gdb --args ./my_program my_arguments
+```
+
+### I'd like to keep a program running after disconnect.
+
+Use `screen` (or tmux, but I prefer screen).
+
+`screen command-line` or `screen bash` then run your command.  Or if you just want to launch it and forget it, i.e. if using `/etc/rc.local` then use `screen -AmdS screen_name comamnd`.
+
+To detach from inside a screen, `ctrl+a` then `ctrl+x`, to exit, `ctrl+a` then `ctrl+k`.
+
+To re-attach to a screen that is running use `screen -x` - if there are multiple screens, you can use `screen -x screen_name` note that you can partial match `screen_name`
+
 
 ### How do I Makefile?
 
