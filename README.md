@@ -53,10 +53,74 @@ Single-file headers I wrote:
 
 ## Concepts
 
-TODO
+### Two's Compliment
+
+All modern comptuers store numbers in [two's compliment](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
+
+For an 8-bit number (like a `uint8_t`):
+```
+  0 = 00000000
+  1 = 00000001
+  2 = 00000010
+  3 = 00000011
+    ...
+254 = 11111110
+255 = 11111111
+```
+So, when you overflow, you go from 255 back to 0.
+
+For signed numbers, the MSB (most significant bit) indicates if the number is negative, so you get:
+```
+   0 = 00000000
+     ...
+ 127 = 01111111
+     ...
+-128 = 10000000
+     ...
+  -1 = 11111111
+```
+So, counting goes 0, 1, 2, 3 ... 127, -128, -127, -126, ... -2, -1, 0.
+
+This means:
+ 1. There is one more negative number than positive numbers.
+ 2. 0 is just all 0's.
+ 3. If you typecast an unsigned number that is >128 to a signed number, it will become negative.
+
+For sign-extension, compilers can automatically fill out a sign.  For instance:
+
+```
+	int8_t i = -127;              // 0b10000001
+	int j = i;                    // 0b11111111111111111111111110000001
+	// j is still -126, even though the compiler had to fill out a lot more 1's in the beginning.
+```
+
+There are times when you will want to use other non-8-bit-values for numbers.  You can also force sign extension in these situations.
+
+```
+	int32_t k = 0b1011; // -5 in 4-bit, but k=13
+	k = (k << (32-4) >> (32-4));
+	// k is now -5.
+```
+
+Depending on the type size, you have different constraints. Here is a quick table for different values:
+
+| bits | Signed Minimum | Signed Maximum | Unsigned Minimum | Unsigned Maximum |
+| --- | --- | --- | --- | --- |
+|  4  | -8 | 7 | 0 | 15 |
+|  8  | -128 | 127 | 0 | 256 |
+|  16 | -32,768 | 32,767 | 0 | 65,535 |
+|  24 | -8,388,608 | 8,388,608 | 0 | 16,777,216 |
+|  32 | -2,147,483,648 | 2,147,483,647 | 0 | 4,294,967,296 |
+|  64 | -9.223372037×10¹⁸ | 9.223372037×10¹⁸ | 0 | 1.844674407×10¹⁹ |
+
+### TODO
+
  * Two's Compliemnt
  * Floating Point
  * Heap/Stack/Global memory.
+ * Virtual Clocks
+ * Clock Wrapping
+ * Unicode
 
 ## Embedded / C
 
