@@ -162,7 +162,7 @@ int apsqrt( int i )
 	if( i == 0 ) return 0;
 	int x = 1<<( ( 32 - __builtin_clz(i) )/2);
 	x = (x + i/x)/2;
-//	x = (x + i/x)/2; //Not really needed.
+//	x = (x + i/x)/2; //May be needed depending on how precise you want. (Below graph is without this line)
 	return x;
 }
 ```
