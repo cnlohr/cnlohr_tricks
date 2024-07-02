@@ -403,6 +403,12 @@ To get a backtrace of the most recently crashed program.
 gdb --args ./my_program my_arguments
 ```
 
+### What system calls is a random executable making?
+
+Use strace, you can start it like `strace {command}` - and it will then output a summary of all system calls to >2. 
+
+You can connect strace to an already running process with `strace -p {pid number} -f`
+
 ### I'd like to keep a program running after disconnect.
 
 Use `screen` (or tmux, but I prefer screen).
