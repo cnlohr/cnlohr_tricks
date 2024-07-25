@@ -51,6 +51,7 @@ Single-file headers I wrote:
  * [dwillmore's bit math](https://github.com/dwillmore/bitmath)
  * [Stanford bit twiddling hacks](https://graphics.stanford.edu/~seander/bithacks.html)
  * [cnlohr's assembly notes](https://github.com/cnlohr/assembly-notes)
+ * [hexagon math grids and equations for how to work with hexagons](https://www.redblobgames.com/grids/hexagons/)
 
 ## Concepts
 
