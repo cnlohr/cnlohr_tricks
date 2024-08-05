@@ -153,6 +153,38 @@ Computationally, BAMs are very powerful because normal wrap-around logic, such a
 
 ## Embedded / C
 
+### Rand
+
+There are two common library mechanisms for doing rand.  Depending on your system a different one will be more useful than the other: [musl rand() change](https://github.com/dolthub/musl/commit/c79cd27e9e81eb5e223728094f1233ee2fc12dda).
+
+```c
+static unsigned seed;
+
+int rand(void)
+{
+	return (seed = (seed+1) * 1103515245 + 12345 - 1)+1 & 0x7fffffff;
+}
+```
+
+vs
+
+```c
+static uint64_t seed;
+
+int rand(void)
+{
+	seed = 6364136223846793005ULL*seed + 1;
+	return seed>>33;
+}
+```
+
+Be sensitive to consider your architecture specific need here.
+
+Another example is using a [Linear Feedback Shift Register](https://en.wikipedia.org/wiki/Linear-feedback_shift_register) to compute random noise, which has some very interesting numerical properties.  Such as containing a well behaved pattern that repeats only on the period and only reproduces substrings with optimal entropy.
+
+For shaders, two great options are [hashwithoutsine](https://www.shadertoy.com/view/4djSRW), the [HLSL implementation of it](https://github.com/cnlohr/shadertrixx/blob/main/Assets/cnlohr/Shaders/hashwithoutsine/hashwithoutsine.cginc) and [texture assisted noise](https://github.com/cnlohr/shadertrixx/tree/main/Assets/cnlohr/Shaders/tanoise) from Toocanzs. 
+
+
 ### Fast Approximate Integer Square Root
 
 First, get the approximate square root from the next power-of-2, then refine it.
