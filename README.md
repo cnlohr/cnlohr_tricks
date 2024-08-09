@@ -153,6 +153,15 @@ Computationally, BAMs are very powerful because normal wrap-around logic, such a
 
 ## Embedded / C
 
+### Read the MSB of an 8-, 16-, 32- or 64-bit number.
+
+You don't need to xor by some massive number and shift down, you can just abuse signed math.
+
+For instance with int64_t.
+```c
+unsigned msb = ((int64_t)value) < 0;
+```
+
 ### Rand
 
 There are two common library mechanisms for doing rand.  Depending on your system a different one will be more useful than the other: [musl rand() change](https://github.com/dolthub/musl/commit/c79cd27e9e81eb5e223728094f1233ee2fc12dda).
