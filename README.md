@@ -189,11 +189,11 @@ int rand(void)
 
 Be sensitive to consider your architecture specific need here.
 
-Another example is using a [Linear Feedback Shift Register](https://en.wikipedia.org/wiki/Linear-feedback_shift_register) to compute random noise, which has some very interesting numerical properties.  Such as containing a well behaved pattern that repeats only on the period and only reproduces substrings with optimal entropy.
+Another example is using a [Linear Feedback Shift Register](https://en.wikipedia.org/wiki/Linear-feedback_shift_register) to compute random noise, which has some very interesting numerical properties.  Such as containing a well behaved pattern that repeats only on the period and only reproduces bit-wise substrings with optimal entropy.  It does have one major drawback, in that the data does not appear to be white noise when reading the uint32_t's.  While it gives you every one of the 2^32-1 outputs, it will apper correlated.
 
 ```c
-uint32_t lfsr;
-void srand( uint32_t s ) { if( !s ) s = 1; lfsr = s; }
+uint32_t lfsr = 0xACEA1EACU;
+void srand( uint32_t s ) { if( !s ) s = 1; lfsr = s; } // State can't be 0.
 uint32_t rand()
 {
  	unsigned msb = (int32_t) lfsr < 0;
