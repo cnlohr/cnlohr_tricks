@@ -192,16 +192,16 @@ Be sensitive to consider your architecture specific need here.
 Another example is using a [Linear Feedback Shift Register](https://en.wikipedia.org/wiki/Linear-feedback_shift_register) to compute random noise, which has some very interesting numerical properties.  Such as containing a well behaved pattern that repeats only on the period and only reproduces bit-wise substrings with optimal entropy.  It does have one major drawback, in that the data does not appear to be white noise when reading the uint32_t's.  While it gives you every one of the 2^32-1 outputs, it will apper correlated.
 
 ```c
-uint32_t lfsr = 0xACEA1EACU;
+uint32_t lfsr = 0xACEA1EACU; // Any non-zero start value will do.
 void srand( uint32_t s ) { if( !s ) s = 1; lfsr = s; } // State can't be 0.
 uint32_t rand()
 {
  	unsigned msb = (int32_t) lfsr < 0;
 	lfsr <<= 1;
-	if (msb) lfsr ^= 0x8000007A;
+	if (msb) lfsr ^= 0x5E000001;
 	return lfsr;
 }
-
+```
 
 
 For shaders, two great options are [hashwithoutsine](https://www.shadertoy.com/view/4djSRW), the [HLSL implementation of it](https://github.com/cnlohr/shadertrixx/blob/main/Assets/cnlohr/Shaders/hashwithoutsine/hashwithoutsine.cginc) and [texture assisted noise](https://github.com/cnlohr/shadertrixx/tree/main/Assets/cnlohr/Shaders/tanoise) from Toocanzs. 
