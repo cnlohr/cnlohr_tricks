@@ -214,6 +214,7 @@ uint32_t rand()
 	return lfsr;
 }
 ```
+Please note, that the individual returned values are heavily correlated, as they are constantly decaying downward.  If you want good random data take the LSB of the output of the above function.
 
 
 For shaders, two great options are [hashwithoutsine](https://www.shadertoy.com/view/4djSRW), the [HLSL implementation of it](https://github.com/cnlohr/shadertrixx/blob/main/Assets/cnlohr/Shaders/hashwithoutsine/hashwithoutsine.cginc) and [texture assisted noise](https://github.com/cnlohr/shadertrixx/tree/main/Assets/cnlohr/Shaders/tanoise) from Toocanzs. 
