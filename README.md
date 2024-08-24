@@ -131,6 +131,11 @@ It gets worse with bigger numbers, for instance, if you take 16777214.0f (2^24-2
 
 Many smaller processors do not have hardware support for floating-ppint, and if you use `float` on an AVR, it's going to emulate all the float values in software with integer math, which will cause it to go VERY slowly, and use a LOT of flash, one alternative is to use the afore-mentioned [Fixed Point Math](#fixed-point-math).  And even on processors or systems like GPUs with `double` prcision hardware, they will run much slower.
 
+### This table from hackingcpp.com
+
+![https://hackingcpp.com/cs/number_representations.png](https://hackingcpp.com/cs/number_representations.png)
+
+
 ### BAMs
 
 BAMs are a way of representing rotations that effectively use natural integer overflows, as well as fully utilizing a binary space, which is great for storing or transmitting rotations.  There is no standard for how many bits BAMs use to encode rotation, but using fewer bits will make for chunkier rotations.
