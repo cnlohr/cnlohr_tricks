@@ -32,6 +32,7 @@ Note that some header-only libraries are actually .c files.  But that's ok, you 
 | [stb](https://github.com/nothings/stb/) | Load .ttf files and get raster pixel data | [stb_truetype.h](https://raw.githubusercontent.com/nothings/stb/master/stb_truetype.h) |
 | [stb](https://github.com/nothings/stb/) | Load .png, .pnm, .jpg, .bmp, .psd, .tga, .gif, .hdr, and .pic files | [stb_image.h](https://raw.githubusercontent.com/nothings/stb/master/stb_image.h) |
 | [olive.c](https://github.com/tsoding/olive.c) | Tiny graphics library for working on pixel buffers | [olive.c](https://raw.githubusercontent.com/tsoding/olive.c/master/olive.c) |
+| [frog_utf.h](https://github.com/Joshua-Ashton/frog_utf/blob/master/frog_utf.h) | Utilities for converting between characters, UTF-8, UCS, etc. | [frog_utf](https://github.com/Joshua-Ashton/frog_utf) |
 
 Single-file headers I wrote:
 
@@ -55,9 +56,9 @@ Single-file headers I wrote:
 
 ## Concepts
 
-### Two's Compliment
+### Two's complement
 
-All modern comptuers store numbers in [two's compliment](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
+All modern comptuers store numbers in [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
 
 For an 8-bit number (like a `uint8_t`):
 ```
@@ -148,7 +149,7 @@ Computationally, BAMs are very powerful because normal wrap-around logic, such a
 
 ### Clock Timestamp Wrapping
 
-There are a lot of "rollover" bugs in coding clocks and time deltas, but conveniently, two's compliment overflow behavior makes it possible to very easily use, for instance, 32-bit clock timestamps in situations where they will wrap around without any special or tricky handling logic.
+There are a lot of "rollover" bugs in coding clocks and time deltas, but conveniently, two's complement overflow behavior makes it possible to very easily use, for instance, 32-bit clock timestamps in situations where they will wrap around without any special or tricky handling logic.
 
 This is especially useful in situations with a systick counter likein many ARM and RISC-V processors.  Instead of altering the timer value, you can always look relative. 
 
@@ -223,8 +224,14 @@ In general UTF-8 has few if any serious downsides, and in the opinion of the edi
 
  * Heap/Stack/Global memory.
  * Virtual Clocks
- * Clock Wrapping
- * Unicode
+ * Sampling Rates / Bandwidth
+ * Compression Algos (LZSS + Huffman + VPX)
+ * Maybe something else complex numbers.
+ * High Level View of Cryptography (Hashing + Signing + ECC/DH + Symmetric)
+ * https://austinhenley.com/blog/cosine.html
+ * Complex phasor explaination
+ * Kicad board layout defaults.
+
 
 ## Embedded / C
 
