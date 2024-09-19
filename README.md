@@ -146,14 +146,58 @@ BAMs work the exact same in signed and unsighed numbers.  For instance, a circle
 
 Computationally, BAMs are very powerful because normal wrap-around logic, such as given one angle, 15°, what is the difference in angle to 300°?  Normally you'd need to check if you wrapped over 360°, then subtract 360°, etc.  But with BAMs, you can just subtract, and typecast.  Say 15 BAMs to 250 BAMs?  `(int8_t)(15-250) = 21`  or `(int8_t)(250-15) = -21`.  
 
+### Clock Timestamp Wrapping
+
+There are a lot of "rollover" bugs in coding clocks and time deltas, but conveniently, two's compliment overflow behavior makes it possible to very easily use, for instance, 32-bit clock timestamps in situations where they will wrap around without any special or tricky handling logic.
+
+This is especially useful in situations with a systick counter likein many ARM and RISC-V processors.  Instead of altering the timer value, you can always look relative. 
+
+The principle is you use three different types:
+
+```c
+typedef int32_t timestamp; // Do this so the default delta behavior is handled well.
+typedef int32_t relative_timestamp;
+typedef uint32_t elapsed_time;  // Used for getting extra headroom, as it can represent a time space of twice as large.
+```
+
+Operations you will need to perform:
+
+Check if an event has passed:
+
+```c
+timestamp now = GetCurrentTimestamp();
+timestamp target_time = some_other_time;
+if( now - target_time > 0 )
+{
+	// The event has now passed, do something at this time.
+}
+```
+
+Get time since an event has happened.
+
+```c
+elapsed_time elapsed = GetCurrentTimestamp() - some_other_timestamp;
+// elapsed is total time between two events
+```
+
+Typical rule-of-thumb numbers:
+
+| What | Maximum Represented Delta Time |
+| --- | --- |
+| Microseconds, int32_t | 35 minutes |
+| Microseconds, uint32_t | 71 minutes |
+| Milliseconds, int32_t | 24.85 days |
+| Milliseconds, uint32_t | [49.7 days](https://news.ycombinator.com/item?id=28340101) |
+| Seconds, int32_t | 68 years [Serious issues may happen on January 19, 2038](https://en.wikipedia.org/wiki/Year_2038_problem) |
+| Seconds, uint32_t | 136 years |
+
+And for precision numbers, if you represent a timestamp as a `float`, after 1.5 days, the time quanta becomes about 10ms.
+
 ### TODO
 
-
- * Clock/Timestamp Wrapping
  * Heap/Stack/Global memory.
  * Virtual Clocks
  * Clock Wrapping
- * BAMs
  * Unicode
 
 ## Embedded / C
@@ -275,7 +319,7 @@ Sometimes if you have a discrete series you may want to find the "center" of a s
 You can search the list of entries to find the tallest peak, then once found, look at the peak to the left and right.  You can then use the following formula to say "The center is *d* below the highest cell" or "The center is *d* above the highest cell"
 
 ```c
-int n = the highest value in a local data set.
+int n = the highest value in a local data set;
 float lowercell = data[n-1];
 float center = data[n];
 float uppercell = data[n+1];
