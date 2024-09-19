@@ -626,6 +626,15 @@ There are some shortcuts in Makefiles.  Like:
 
 That's honestly all you need to know for now.
 
+From from @OwenTheProgrammer, "My makefile doesnt recompile if I save header files!"
+
+```makefile
+# Get all the header files
+INC_FILES = $(wildcard $(INC_DIR)/*.h)
+# And add them to some dependency list
+something: ... $(INC_FILES)
+```
+
 ### How to make system calls in C, when programming without a standard library.
 
 You have to make a syscall, but you can use inline assembly to wrap it so that it doesn't have to spend time/effort getting the registers setup correctly.
@@ -634,10 +643,7 @@ Be sure to compile with: `gcc -Os -nostdlib -Wl,-e"start" -ffunction-sections -f
 
 ```c
 #include <asm/unistd.h>      // compile without -m32 for 64 bit call numbers
-
 // In x86_64 only.
-
-
 // call write( int fd, uint8_t ptr, int length )
 asm volatile
 (
