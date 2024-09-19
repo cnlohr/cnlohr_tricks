@@ -267,6 +267,25 @@ For removing DC offset, or computing high-pass, take your value, and subtract th
 ```
 ![ifilt](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/ifilt.png?raw=true)
 
+
+### Finding the center of a peak looking at discrete bins
+
+Sometimes if you have a discrete series you may want to find the "center" of a signal causing it.  This is particularly useful when looking at DFT bins, a touch sensor. Or, trying to find an impulse.  In general this works very well with normal distributions, but can work with any distribution that is symmetric, or even vaguely symmetric.
+
+You can search the list of entries to find the tallest peak, then once found, look at the peak to the left and right.  You can then use the following formula to say "The center is *d* below the highest cell" or "The center is *d* above the highest cell"
+
+```c
+int n = the highest value in a local data set.
+float lowercell = data[n-1];
+float center = data[n];
+float uppercell = data[n+1];
+float d = (uppercell-lowercell)*0.5/min( uppercell-center, lowercell-center );
+```
+
+![powercenter](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/powercenter.png?raw=true)
+
+:warning: This does not handle if there are multiple peaks or multipath.  You would need to find the other peaks and find your specific situation to subtract out other peaks from the data, with their distribtuion, then re-run to find additional peaks.  Additionally, only center sources that have a distinct hill can be found, mathematically (not just this method).
+
 ### Fixed Point Math
 
 So, you want to do math, and you feel like you want to use floating point.  Maybe you don't.  Fixed point math gives you MORE accuracy with the same number of bits, and
