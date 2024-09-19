@@ -231,6 +231,8 @@ In general UTF-8 has few if any serious downsides, and in the opinion of the edi
  * https://austinhenley.com/blog/cosine.html
  * Complex phasor explaination
  * Kicad board layout defaults.
+ * This Kahan trick for avoiding precision problems with floats:  https://pharr.org/matt/blog/2019/11/03/difference-of-floats
+ * Magnet Wire Bodge Wire Trick
 
 
 ## Embedded / C
