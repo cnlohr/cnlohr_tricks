@@ -191,7 +191,33 @@ Typical rule-of-thumb numbers:
 | Seconds, int32_t | 68 years [Serious issues may happen on January 19, 2038](https://en.wikipedia.org/wiki/Year_2038_problem) |
 | Seconds, uint32_t | 136 years |
 
+Please note, that if you follow rules above this table, there is no ill effect from wraparound.
+
 And for precision numbers, if you represent a timestamp as a `float`, after 1.5 days, the time quanta becomes about 10ms.
+
+### Unicode
+
+While historically, the need for multiple charsets was handled by replacing existing charsets, which caused [mojibake](https://en.wikipedia.org/wiki/Mojibake), in early 1992 UTF-16 was introduced which allowed for the repesentation for many new chars (though it is still limited in implementations that only support UCS-2).  This was adopted by platforms such as java, javascript and C# for string representation.
+
+UTF can use variable-length codepoints, where as UCS is fixed-length codepoints. UCS-4 is identical to UTF-32. But, UCS-2 cannot represent as many characters as UTF-16. One other note is some people will convert unicode to UTF-32 or UCS-4 so that it is easier to count characters.  Or more specifically, each grapheme.
+
+Wikipedia uses the following string as an [example](https://en.wikipedia.org/wiki/Character_encoding): "ab̲c𐐀" where it uses (U+0332 ̲ COMBINING LOW LINE) to modify "b" as well as an extended char "𐐀". It is 4 characters: a, b̲, c, 𐐀.  But, 5 graphemes: a, b, _, c, 𐐀.  This means it is represented by 5 unicode code points U+0061, U+0062, U+0332, U+0063, U+10400.  If you encode it as UTF-32/UCS-32 using the following codes: 0x00000061, 0x00000062, 0x00000332, 0x00000063, 0x00010400.  But it would take six UTF-16 characters to represent: 0x0061, 0x0062, 0x0332, 0x0063, 0xD801, 0xDC00.  Or, nine bytes: 0x61, 0x62, 0xCC, 0xB2, 0x63, 0xF0, 0x90, 0x90, 0x80
+
+UTF-8 was developed which allows for treating all strings as strings of 8-bit characters, while representing the whole space. This has unfortunately caused a divergence in computing where many systems continue to use UTF-16 (or UCS-2), instead of UTF-8.  UTF-8 can represent regular latin chars as a single-byte.  For more exotic characters, it can use multiple bytes to represent all 1,112,064 possible code points.
+
+There is one major note here.  With UTF-8, the number of characters represented in a string is different from the naive `strlen` of a string.  For this reason, for dealing with unicode strings, where you care about the number of characters, you will need to use a library like to compute length of string, which can be done using a library like [frog_utf](https://github.com/Joshua-Ashton/frog_utf).
+
+UTF-8 uses multiple bytes to represent individual code points in the following way (from [wikipedia](https://en.wikipedia.org/wiki/UTF-8)):
+
+| First code point | Last code point | Byte 1 | Byte 2 | Byte 3 | Byte 4 |
+| -- | -- | -- | -- | -- | -- |
+| U+0000 | U+007F | 0xxxxxxx | N/A |
+| U+0080 | U+07FF | 110xxxxx | 10xxxxxx | N/A |
+| U+0800 | U+FFFF | 1110xxxx | 10xxxxxx | 10xxxxxx | N/A |
+| U+010000 | U+10FFFF | 11110xxx | 10xxxxxx | 10xxxxxx | 10xxxxxx |
+
+In general UTF-8 has few if any serious downsides, and in the opinion of the editor UTF-8 is the only serious contender for charsets moving forward, unless you are specifically operating within a dead ecosystem.  There is a more in-depth discussion here: [utf8everywhere.org](https://utf8everywhere.org/).
+
 
 ### TODO
 
