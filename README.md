@@ -18,6 +18,8 @@ In one .c file in your project:
 #include "package.h"
 ```
 
+Note: if you are doing this _from_ a header file, be sure to `#undef PACKAGE_IMPLEMENTATION` afterwards.
+
 If you need the header file to use it in other .c files in your project, just include the package, directly.
 
 ```
