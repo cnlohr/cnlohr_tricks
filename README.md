@@ -678,4 +678,7 @@ asm volatile
 
 Because smaller capacitors many times will have much, much lower capacitance once you put a DC voltage (bais) across them.
 
+![https://github.com/cnlohr/cnlohr_tricks/blob/master/media/capacitors-esr.png?raw=true](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/capacitors-esr.png?raw=true)
+
+And they typically have much better current carrying + lower ESR.
 
