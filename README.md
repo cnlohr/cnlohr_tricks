@@ -682,3 +682,4 @@ Because smaller capacitors many times will have much, much lower capacitance onc
 
 And they typically have much better current carrying + lower ESR.
 
+Find your specific capacitor [here](https://www.samsungsem.com/resources/file/global/support/product_catalog/MLCC.pdf), to get all the data on it.  While this link is for Samsung, most capacitor manufacturers have similar properties.
