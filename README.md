@@ -224,6 +224,8 @@ In general UTF-8 has few if any serious downsides, and in the opinion of the edi
 
 ### TODO
 
+ * Licenses
+ * Thread-Safe Queues
  * Heap/Stack/Global memory.
  * Virtual Clocks
  * Sampling Rates / Bandwidth
