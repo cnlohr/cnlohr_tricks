@@ -124,7 +124,7 @@ Depending on the type size, you have different constraints. Here is a quick tabl
 
 But, instead of using base-10, it uses binary.  So it has a sign (plus or minus), an exponent (8 bits) and a mantissa (23 bits), or 1/11/52 for `double`-precision floating pint.
 
-A float value is organized as follows:
+A float value is organized as follows (each letter represents 1 bit, the S (or sign) bit is the most significant bit).
 
 `SEEEEEEEEMMMMMMMMMMMMMMMMMMMMMMM`
 
