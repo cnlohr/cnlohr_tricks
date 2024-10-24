@@ -599,6 +599,15 @@ To detach from inside a screen, `ctrl+a` then `ctrl+x`, to exit, `ctrl+a` then `
 
 To re-attach to a screen that is running use `screen -x` - if there are multiple screens, you can use `screen -x screen_name` note that you can partial match `screen_name`
 
+### Do I extract images from a PDF file?
+
+Using pdfimages;
+
+Make a folder and do:
+
+```sh
+pdfimages -all slvaeb5.pdf /tmp/images/
+```
 
 ### How do I Makefile?
 
@@ -685,3 +694,12 @@ Because smaller capacitors many times will have much, much lower capacitance onc
 And they typically have much better current carrying + lower ESR.
 
 Find your specific capacitor [here](https://www.samsungsem.com/resources/file/global/support/product_catalog/MLCC.pdf), to get all the data on it.  While this link is for Samsung, most capacitor manufacturers have similar properties.
+
+## LED's forward voltage changes depending on current and temperature
+
+From this execellent presentation, [here](https://www.ti.com/lit/an/slvaeb5/slvaeb5.pdf?ts=1729743467093), you can use the Vf of an LED to roughly determine its junction (and possibly by extension die) temperature.  For fun and safety. 🤓
+
+![https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph2.png?raw=true](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph2.png?raw=true)
+
+![https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true)
+
