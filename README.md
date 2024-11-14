@@ -35,6 +35,7 @@ Note that some header-only libraries are actually .c files.  But that's ok, you 
 | [stb](https://github.com/nothings/stb/) | Load .png, .pnm, .jpg, .bmp, .psd, .tga, .gif, .hdr, and .pic files | [stb_image.h](https://raw.githubusercontent.com/nothings/stb/master/stb_image.h) |
 | [olive.c](https://github.com/tsoding/olive.c) | Tiny graphics library for working on pixel buffers | [olive.c](https://raw.githubusercontent.com/tsoding/olive.c/master/olive.c) |
 | [frog_utf.h](https://github.com/Joshua-Ashton/frog_utf/blob/master/frog_utf.h) | Utilities for converting between characters, UTF-8, UCS, etc. | [frog_utf](https://github.com/Joshua-Ashton/frog_utf) |
+| [gifenc](https://github.com/lecram/gifenc) | Create .gif animations from raw frame data | [gifenc.c](https://raw.githubusercontent.com/lecram/gifenc/refs/heads/master/gifenc.c), [gifenc.h](https://raw.githubusercontent.com/lecram/gifenc/refs/heads/master/gifenc.h) |
 
 Single-file headers I wrote:
 
