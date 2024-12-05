@@ -256,6 +256,21 @@ For instance with int64_t.
 unsigned msb = ((int64_t)value) < 0;
 ```
 
+# In Place Swap Two Numbers Without Third Register
+
+```c
+x = x xor y
+y = x xor y
+x = x xor y
+```
+
+Or in c
+```c
+x = x ^ y;
+y = x ^ y;
+x = x ^ y;
+```
+
 ### Rand
 
 There are two common library mechanisms for doing rand.  Depending on your system a different one will be more useful than the other: [musl rand() change](https://github.com/dolthub/musl/commit/c79cd27e9e81eb5e223728094f1233ee2fc12dda).
