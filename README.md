@@ -50,6 +50,12 @@ Single-file headers I wrote:
 | [rtgz-tinf-util](https://github.com/cnlohr/rtgz-tinf-util) | Custom deflate decompressor, and custom compressor for targeting tiny decode windows | [tinf_sf.h](https://raw.githubusercontent.com/cnlohr/rtgz-tinf-util/master/tinf_sf.h) |
 | [csgp4](https://github.com/cnlohr/csgp4) | SGP4 Orbital Mechanics Header-Only file (portable to HLSL) for computing satellite positions at times | [csgp4.h](https://raw.githubusercontent.com/cnlohr/csgp4/master/csgp4.h) |
 
+Great things to copy-paste from
+
+| Name/Package/Page | Description | File/URL |
+| --- | --- | --- |
+| [chacha20 basic implementation](https://gist.github.com/cleverca22/6255d1a637714c4147f2430bdd397506) | chacha2.0 symmetric block cypher basic c reference by cleverca22 | [chacha20.c](https://gist.githubusercontent.com/cleverca22/6255d1a637714c4147f2430bdd397506/raw/4247a5d76f1bde5fd14bb8420475c516a1d97d24/main.c) |
+
 ### Links to other neat documents
 
  * [dwillmore's bit math](https://github.com/dwillmore/bitmath)
