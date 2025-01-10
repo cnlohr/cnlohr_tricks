@@ -60,6 +60,13 @@ Great things to copy-paste from
 
  * [dwillmore's bit math](https://github.com/dwillmore/bitmath)
  * [Stanford bit twiddling hacks](https://graphics.stanford.edu/~seander/bithacks.html)
+ * [Code to accompany Hacker's Delight 2nd Edition by Henry S Warren.] https://github.com/hcs0/Hackers-Delight/tree/master Contains:
+   * 2D Bit Transposes
+   * Next-number-with-same-number-of-ones-bits
+   * Very clever square root code
+   * Bit Reversals
+   * Count one's
+   * etc... 
  * [cnlohr's assembly notes](https://github.com/cnlohr/assembly-notes)
  * [hexagon math grids and equations for how to work with hexagons](https://www.redblobgames.com/grids/hexagons/)
 
