@@ -628,6 +628,12 @@ To detach from inside a screen, `ctrl+a` then `ctrl+x`, to exit, `ctrl+a` then `
 
 To re-attach to a screen that is running use `screen -x` - if there are multiple screens, you can use `screen -x screen_name` note that you can partial match `screen_name`
 
+### I want to get a raw deflate (zlib but without the header) file.  How do I do that?
+
+```sh
+cat <your file> | gzip -9 | dd bs=1 skip=10 | head -c -8
+````
+
 ### Do I extract images from a PDF file?
 
 Using pdfimages;
