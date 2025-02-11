@@ -72,6 +72,34 @@ Great things to copy-paste from
 
 ## Concepts
 
+### Optimization
+
+
+"Premature optimization is the root of all evil." - Donald Knuth
+
+But keep in mind when Knuth wrote books, most of the time he wrote them in assembly, so I think his definition and our definition of "premature" optimization are drastically different.
+
+CNLohr's correllary "... but there's nothing wrong with writing your code clearly in ways that are easy for the compiler to make things fast.  Just don't sacrifice readability or maintainability for it unless you need to."
+
+#### [Amdahl's law](https://en.wikipedia.org/wiki/Amdahl%27s_law)
+
+![https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Optimizing-different-parts.svg/1920px-Optimizing-different-parts.svg.png](Optimization Graphs)
+
+When you optimize a program, you can only speed up the overall program by at most the amount of time the program spends doing the thing you are optimizing.
+
+So, be sure to profile before you spend any serious time optimizing.
+
+#### CNLohr's Order-Of-Optimization
+
+1. Is there some algebraic way to simplify your problem?
+2. Is there some structural or algorithmic way to simplify/optimize your problem?
+3. Is there a way to apply LUTs or some sort of dynamic programming or caching approach?
+4. If there some fundamental way you can use C differently to solve your problem, or is the compiler doing extra work that you don't need (i.e. avoiding extra function calls, etc.).  For instance if the 5. compiler is doing checks that aren't needed <<< This is where https://godbolt.org/ kicks in, because you want to see if the compiler is doing busy work.
+6. Can you convert some part of your problem to do clever things like popcnt, leading/trailing zero/one count, parallel deposit/extract? I.e. all the tricks on [Stanford Bit Twiddling Hacks](https://graphics.stanford.edu/~seander/bithacks.html) or [https://github.com/hcs0/Hackers-Delight](Hacker's Delight) ... Or potentially use intrinsics, like `clz` `cpop` `ctz`, etc.
+Can you vectorize your problem? I.e. does it have structure that you can parallelize with __m256 (or m512) / Vector256<byte>?
+Is there something to compiler doesn't understand how to optimize about your problem.  If so, you can sometimes resole this with asm volatile.
+You realize know best and the compiler doesn't.  Just rewrite the function in a .S file.  Of course crib any tricky bits from https://godbolt.org/
+
 ### Two's complement
 
 All modern comptuers store numbers in [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
