@@ -79,7 +79,7 @@ Great things to copy-paste from
 
 But keep in mind when Knuth wrote books, most of the time he wrote them in assembly, so I think his definition and our definition of "premature" optimization are drastically different.
 
-CNLohr's correllary "... but there's nothing wrong with writing your code clearly in ways that are easy for the compiler to make things fast.  Just don't sacrifice readability or maintainability for it unless you need to."
+CNLohr's correllary "... but there's nothing wrong with writing your code clearly in ways that are easy for the compiler to make things fast.  Just don't excessively sacrifice readability or maintainability for it unless you need to."
 
 #### [Amdahl's law](https://en.wikipedia.org/wiki/Amdahl%27s_law)
 
