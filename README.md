@@ -83,7 +83,7 @@ CNLohr's correllary "... but there's nothing wrong with writing your code clearl
 
 #### [Amdahl's law](https://en.wikipedia.org/wiki/Amdahl%27s_law)
 
-![Optimization Graphs](https://github.com/user-attachments/assets/56ac736a-bc99-490d-953d-9064129b6ee0)
+![Optimization Consideration](https://github.com/user-attachments/assets/ca13c26d-75b0-49f2-b03c-306eea1b4b16)
 
 When you optimize a program, you can only speed up the overall program by at most the amount of time the program spends doing the thing you are optimizing.
 
