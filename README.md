@@ -94,7 +94,7 @@ So, be sure to profile before you spend any serious time optimizing.
 1. Is there some algebraic way to simplify your problem?
 2. Is there some structural or algorithmic way to simplify/optimize your problem?
 3. Is there a way to apply LUTs or some sort of dynamic programming or caching approach?
-4. Can you shrink the bloat surrounding how much data you are carrying around everywhere?  Can your approach be data-oriented?
+4. Can you shrink the bloat surrounding how much data you are carrying around everywhere (See this [cppcon 2017 talk by Chandler Carruth](https://www.youtube.com/watch?v=2EWejmkKlxs)?  Can your approach be data-oriented?
 5. If there some fundamental way you can use C differently to solve your problem, or is the compiler doing extra work that you don't need (i.e. avoiding extra function calls, etc.).  For instance if the compiler is doing checks that aren't needed.  You may want to look at the .lst file from your compiler, or put some code into [godbolt.org](https://godbolt.org/).
 6. Can you convert some part of your problem to do clever things like popcnt, leading/trailing zero/one count, parallel deposit/extract? I.e. all the tricks on [Stanford Bit Twiddling Hacks](https://graphics.stanford.edu/~seander/bithacks.html) or [https://github.com/hcs0/Hackers-Delight](Hacker's Delight) ... Or potentially use intrinsics, like `clz` `cpop` `ctz`, etc.
 7. Can you vectorize your problem? I.e. does it have structure that you can parallelize with __m256 (or m512) / Vector256<byte>?
