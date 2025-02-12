@@ -100,6 +100,8 @@ So, be sure to profile before you spend any serious time optimizing.
 8. Is there something to compiler doesn't understand how to optimize about your problem.  If so, you can sometimes resole this with asm volatile. (See [my Hackaday 2022 talk](https://www.youtube.com/watch?v=Gelf0AyVGy4) or [my page on assembly optimization in C](https://github.com/cnlohr/assembly-notes))
 9. You find that you know best and the compiler doesn't.  You give up and rewrite the function in a .S file.  (But crib all the good parts the compiler found from godbolt.org)
 
+Threading can happen anywhere from 1 to 9 depending on your use case, for instance if you just need to do something quick and dirty, threading might be first.  But, keep in mind it doesn't "buy you" anything, in that if you are going nowhere fast.  You'll still be going nowhere.  Just faster.
+
 ### Two's complement
 
 All modern comptuers store numbers in [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
