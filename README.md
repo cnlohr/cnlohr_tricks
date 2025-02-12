@@ -97,7 +97,7 @@ So, be sure to profile before you spend any serious time optimizing.
 5. Is there a way to apply LUTs or some sort of dynamic programming or caching approach?
 6. Can you convert some part of your problem to do clever things like popcnt, leading/trailing zero/one count, parallel deposit/extract? I.e. all the tricks on [Stanford Bit Twiddling Hacks](https://graphics.stanford.edu/~seander/bithacks.html) or [Hacker's Delight](https://github.com/hcs0/Hackers-Delight) ... Or potentially use intrinsics, like `clz` `cpop` `ctz`, etc.
 7. Can you vectorize your problem? I.e. does it have structure that you can parallelize with __m256 (or m512) / Vector256<byte>?
-8. Is there something to compiler doesn't understand how to optimize about your problem.  If so, you can sometimes resole this with asm volatile. (See [cnlohr's Hackaday 2022 talk](https://www.youtube.com/watch?v=Gelf0AyVGy4) or [my page on assembly optimization in C](https://github.com/cnlohr/assembly-notes))
+8. Is there something to compiler doesn't understand how to optimize about your problem.  If so, you can sometimes resole this with asm volatile. (See [my Hackaday 2022 talk](https://www.youtube.com/watch?v=Gelf0AyVGy4) or [my page on assembly optimization in C](https://github.com/cnlohr/assembly-notes))
 9. You find that you know best and the compiler doesn't.  You give up and rewrite the function in a .S file.  (But crib all the good parts the compiler found from godbolt.org)
 
 ### Two's complement
