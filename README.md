@@ -102,6 +102,10 @@ So, be sure to profile before you spend any serious time optimizing.
 
 Threading can happen anywhere from 1 to 9 depending on your use case, for instance if you just need to do something quick and dirty, threading might be first.  But, keep in mind it doesn't "buy you" anything, in that if you are going nowhere fast.  You'll still be going nowhere.  Just faster.
 
+#### Quirky things to know about optimization
+
+1. Try to use native sizes for parameters instead of the smallest type where reasonable.  For instance, on many architectures using `uint8_t` paramters instead of `int` will frequently result in larger binaries and no benefit, because to use `uint8_t` it must mask off bits.
+
 ### Two's complement
 
 All modern comptuers store numbers in [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
