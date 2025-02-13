@@ -1,6 +1,6 @@
 # Some tricks I've found over time
 
-The contents of this readme is public domain where possible. And if licensing is required, it may be licensed under the MIT, NewBSD, ISC, Zlib, MIT0 or CC0 licenses.
+The original contents of this readme (except for linked images that are still owned by their respective owners) is public domain where possible. And if licensing is required, it may be licensed under the MIT, NewBSD, ISC, Zlib, MIT0 or CC0 licenses.
 
 ## Links and Libraries
 
