@@ -529,6 +529,33 @@ int main()
 
 ## DSP
 
+### IIR Filtering
+
+Everyone loves complicated filtering, but if you want to do something like:
+ * Filter a noisy signal
+ * Make a UI item smoothly
+
+Fyi lerp() here is: `lerp( a, b, t )` `a * (1-t) + a * t`
+
+Where a is a value you keep, it's your filtered value.  Then b is the input value.
+
+Using LERP to do good noise / motion IIR filtering:
+ * https://twitter.com/evil_arev/status/1128062338156900353
+ * Slow/Lumpy: `a = lerp( a, b, 0.1f)`
+ * Fast/Noisy: `a = lerp( a, b, 0.9f)`
+ * Adaptive: `a = lerp( a, b, k*(abs(a-b)))`
+
+Time-invariant IIR Lerp for smooth motion in a framerate-dependent way.
+ * constant = how quickly you approach the value
+ * coeff = exp( -unity_DeltaTime * constant );
+ * coeff is very close to one for small timesteps, farther for bigger timesteps, so...
+ * `a = lerp( b, a, coeff )`
+
+You can see a comparison with some other filters here: https://www.shadertoy.com/view/NlcXWM including
+ * A 1€ filter (These are cool, as they are kind of adaptive)
+ * A proper adaptive filter
+ * This basic filter outlined above.
+
 ### Goertzel's Sinewave
 
 A lot of times, you will want to use a sinewave, or need to do DFT for specific tone.
