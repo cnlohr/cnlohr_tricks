@@ -654,6 +654,8 @@ int main()
 
 ![goertzels1](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/goertzels1.png?raw=true)
 
+This has been codified into a Google Sheets worksheet, [here](https://docs.google.com/spreadsheets/d/1uEJZy0o2NloHmxJm_240LDxhiuzhst_ewG1keyGCG-A/edit?usp=sharing)
+
 ## Linux and Development
 
 ### My program segfaulted, why?
