@@ -611,6 +611,8 @@ Below is an example using Goertzel's Algorithm to extract the phase and magnitud
 
 This is performing a DFT.  If all you are looking for is a single value, DFTs are massively faster than FFTs.
 
+It is important to remember that the sprev, and sprev2 contain sufficient information to reconstruct the real and imaginary values from the input signal.  So it is fundamentally performing both a cosine and sine transform simultaneously.
+
 ```c
 #include <stdio.h>
 #include <math.h>
