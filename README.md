@@ -88,6 +88,8 @@ When you optimize a program, you can only speed up the overall program by at mos
 
 So, be sure to profile before you spend any serious time optimizing.
 
+Amdah's law is usually used as an excuse to not optimize things unless a significant amount of perf is spent doing that thing.  But, in reality, by making other things more optimized, it can put pressure on the parts that would not have gotten attention before to be faster, because as portions of a system become optimized, the un-optimized portions of the application now take up a porportionally larger amount of time.
+
 #### CNLohr's Order-Of-Optimization
 
 1. Is there some algebraic way to simplify your problem?
