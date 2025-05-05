@@ -699,7 +699,25 @@ To re-attach to a screen that is running use `screen -x` - if there are multiple
 cat <your file> | gzip -9 | dd bs=1 skip=10 | head -c -8
 ````
 
-### Do I extract images from a PDF file?
+### I want to monitor my system temps but fast
+
+```
+watch --interval=0.1 sensors
+```
+
+### I want to see the current frequency all of my CPUs are running at
+
+```
+watch -n.1 "grep \"^[c]pu MHz\" /proc/cpuinfo"
+```
+
+### I want to stress test my CPU
+
+```
+stress -c 12
+```
+
+### I want to extract images from a PDF file?
 
 Using pdfimages;
 
