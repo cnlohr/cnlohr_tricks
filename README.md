@@ -701,6 +701,12 @@ To re-attach to a screen that is running use `screen -x` - if there are multiple
 cat <your file> | gzip -9 | dd bs=1 skip=10 | head -c -8
 ````
 
+### My keyboard keys sometimes stick in Linux because I am doing weird things with deskflow/synergy/barrier and/or wacky HID USB things
+
+```
+DISPLAY=:0 xdotool keyup Shift_L Shift_R Control_L Control_R Meta_L Meta_R Alt_L Alt_R Super_L Super_R Hyper_L Hyper_R ISO_Level2_Latch ISO_Level3_Shift ISO_Level3_Latch ISO_Level3_Lock ISO_Level5_ShiftISO_Level5_Latch ISO_Level5_Lock 204
+```
+
 ### I want to monitor my system temps but fast
 
 ```
