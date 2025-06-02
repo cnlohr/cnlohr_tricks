@@ -811,6 +811,8 @@ asm volatile
 
 ## Why use bigger capacitors in lieu of smaller MLCC's?
 
+![https://github.com/CDFER/Ceramic-Capacitor-Derating?tab=readme-ov-file](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/capacitors-derate.png?raw=true)
+
 ![https://github.com/cnlohr/cnlohr_tricks/blob/master/media/capacitors.png?raw=true](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/capacitors.png?raw=true)
 
 Because smaller capacitors many times will have much, much lower capacitance once you put a DC voltage (bais) across them.
