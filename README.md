@@ -660,6 +660,172 @@ int main()
 
 This has been codified into a Google Sheets worksheet, [here](https://docs.google.com/spreadsheets/d/1uEJZy0o2NloHmxJm_240LDxhiuzhst_ewG1keyGCG-A/edit?usp=sharing)
 
+## Sources for clever sinusoidal calculations
+
+Someone pointed out the webstite here: https://amycoders.org/tutorials/sintables.html
+
+THIS SECTION OF TEXT IS COPIED FROM that website, wholesale.  If there is any issue with this, please reach out to me and I will remove it from here but it is was of such importance I felt it was crucial not to be lost.
+
+Sinetable Calculation v1.1, Sinustable calculations by Azure
+> ## Sinustable calculations by Azure 
+> Calculating sinus-tables can be quite useful in some cases - for example in 4k or 40k intros when you are in a lack of diskspace and cant afford saving some extra kilobytes of tables. Also in other programs some runtime-calculated sinus-tables might be useful. And last but not least programming a sinus-table generator is a nice challange.
+> 
+> This article covers the maths of some algorithms to calculate sinus-tables. No code is given. You should be able to implement it byself. Following methods are covered:
+> * Taylor series
+> * Extrapolation using trigonometrical addition theorems
+> * The harmonical oscilator approach.
+> * Another Algebraic approach
+> * Fix by nao
+> 
+> Of course there are more methods to generate a sinus-list. Like the cordic-algorithm, some tweaked bresenham circle-algorithms etc.. But these are the most handy ones. If you are thinking about them it is no problem for you to generate a sinus table within a few bytes.
+>
+> Addition: Nao pointed out, that with a little additional tweak it is possible to improve the accuracy of the last two approaches a lot. (They are accurate now).
+>
+> ## The Taylor-Series
+>
+> The Taylor series for the sinus-function, or in this special case a MacLaurin series, is quite easy to use. Its a function. Everything you need to do is to insert the disired angle into the function f(x) and you get sin(x).
+>
+> Here we go:
+> f(x)=x - x^3/3! + x^5/5! -.... + x^(4k+1)/(4k+1)! - x^(4k+3)/(4k+3)!+...
+> The more elements you add, the more accurate the approximation of sin(x) is getting. x^7 or x^9 is already quite accurate.
+> Please note, that k!=1*2*3...k (faculty). 5!=1*2*3*4*5=120 for example.
+> So just use this and your sinustable-generator will work fine:
+> f(x)=x - x^3/6 + x^5/120 - x^7/5040 with x e [-pi;pi]
+>
+> ## Extrapolation Using Trigonometrical Addition Theorems
+>
+> This algorithm is using a totally different approach. It is generating the sinus-table recursively out of the first two values of the sinus-table and a given stepwidth. (well actually a cosinus - table in this case. But that is almost the same).
+>
+> Trigonometric addition theorems:
+>
+>  (1) cos(a+c) =cos(a)*cos(c) - sin(a)*sin(b)
+>  (2) cos(a-c) =cos(a)*cos(c) + sin(a)*sin(b)
+>
+> forms into:
+>  (3) sin(a)*sin(b) =cos(a-c) - cos(a)*cos(c)
+> 
+> inserting 3) into 1) gives the final equation:
+> cos(a+c) =2*cos(a)*cos(c) - cos(a-c)
+>
+> This equation makes recursive sinustable calculation possible. how ? easy:
+>
+> f(x)=2*const*f(x-1) - f(x-2)
+> 
+> So everything we need now are the first two values of the sinus (cosinus) list. f(0)=cos(0)=1 and f(1)=cos(c). Also the constant const is needed. It is const=cos(c)=f(1)."c" is the stepwidth of the sinus-list.
+>
+> With the usage of this algorithm really short sinustable generators are possible. But you have to take care of the accuracy. (14bit integer is NOT enough for a 1024 entry table)
+>
+> ## The Harmonical Oscilator Approach
+>
+> This algorithm is also calculating the sinus-table recursively. But it is using a totally different approach, than the trigonometric algorithm. The origins of this equations are to be found in the physic and differental algebra. They describe the energy balance of a hormonical oscilator in a closed system. - Well I dont want to bore you with facts like that.
+> 
+> Here is the derivation:
+> 
+> Assumption:
+> f(x+d)=f(x)+d*f'(x) with d>0
+>
+> This isnt mathematically 100% correct, it is only an approximation. But still accurate enough for our purposes - and quite handy.
+> 
+> Since we want to calculate sinus we set:f(x)=sin(x) d is the stepwidth of the sinus table we want to generate.
+>
+> sin(x+d)=sin(x)+d*cos(x)
+>
+> we derive the whole equation and multiply with d:
+>
+> d*cos(x+d)=d*cos(x)-d*d*sin(x)
+>
+> 1) sin(x+d) = sin(x) + d*cos(x)
+> 2) d*cos(x+d) =d*cos(x) - d*d*sin(x)
+>
+> now we have got two equations, which complete each other to a recursive function to calculate sinus.
+> 
+> a' = a + b
+> b' = b - a*d^2
+>
+> Fixed version: (read below)
+> 
+> a' = a + b
+> b' = b - d^2*a'
+>
+> The starting value of a is: sin(0)=0
+> 
+> The starting value of b is: cos(0)*d=1*d
+>
+> Well and then we also need the constant d^2
+> This algorithm seems to be a little bit easier to handle than the trigonometric one when it comes to integer implementation. Well - the more accurate the calculations are , the later the function will degenerate.
+btw. this calculation can also be applied to a 2d-array with some additional blurring - you will get nice water waves out of it :)
+>
+> ## Another Algebraic Approach
+>
+> This algorithm is very similar to the harmonical oscilator approach. But it has the advantage, that both sinus and cosinus are calculated at the same time. Some people used it in the circlecompo. So I thought I should also add it here..
+>
+> Assumption:
+>
+> f(x+d)=f(x)+d*f'(x)
+> 
+> f'(x+d)=f'(x)+d*f''(x) with d>0
+>
+> Now we set: f(x)=sin(x) - thus f'(x)=cos(x) and f''(x)=-sin(x). Using this facts we can change the equations a bit.
+>
+> f(x+d)=f(x)+d*f'(x)
+> 
+> f'(x+d)=f'(x)-d*f(x)
+>
+> This gives us a nice recursive formula calculating both sin(x)=f(x) and cos(x)=f'(x):
+>
+> a' = a + d * b
+> b' = b - d *a
+> 
+> Fixed version: (read below)
+>
+> a' = a + d * b
+> b' = b - d *a'
+>
+> The starting value of a is: sin(0)=0
+> The starting value of b is: cos(0)=1
+> Well and then we also need the constant d, which is the stepwidth.
+>
+> ## Fix by Nao
+> 
+> This is a little additional tweak to improve the accuracy of the last two approaches.
+> Lets start :
+> a' = a + b*d
+> b' = b - d*a
+> associated matrix (A) is:
+>
+> | 1 -d | = A
+> | d 1 |
+>
+> Det(A)= 1 + d^2
+> 
+> now...we expected an orthogonal matrix, that have determinant equal to 1 or -1.
+> 
+> Let's say, in physic words, that this matrix don't keep 'energy' constant. In fact, area covered by rotation, increase, and we obtain a spiral instead a circle.
+> 
+> Now, i rewrote A, with a little correction:
+>
+> | 1 d | = A
+> | -d (1-d^2) |
+>
+> Det(A) = 1 - d^2 +d^2 = 1
+>
+> OK..now the matrix is (real) correct, but what about new formulas?
+>
+> a' = a + b*d
+> b' = -d*a + b - b*d^2
+>
+> AHHH..new ones are quite odd!
+>
+> But, let try to substitute a' instead a in OLD b' formula:
+>
+> b' = -d*a + b - b*d^2
+> 
+> WOW! exactly like new b' calculus, then we have:
+> 
+> a' = a + b*d
+> b' = b - a'*d
+>
+
 ## Linux and Development
 
 ### My program segfaulted, why?
