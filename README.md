@@ -686,11 +686,16 @@ Sinetable Calculation v1.1, Sinustable calculations by Azure
 > The Taylor series for the sinus-function, or in this special case a MacLaurin series, is quite easy to use. Its a function. Everything you need to do is to insert the disired angle into the function f(x) and you get sin(x).
 >
 > Here we go:
-> f(x)=x - x^3/3! + x^5/5! -.... + x^(4k+1)/(4k+1)! - x^(4k+3)/(4k+3)!+...
+>
+> `f(x)=x - x^3/3! + x^5/5! -.... + x^(4k+1)/(4k+1)! - x^(4k+3)/(4k+3)!+...`
+>
 > The more elements you add, the more accurate the approximation of sin(x) is getting. x^7 or x^9 is already quite accurate.
+>
 > Please note, that k!=1*2*3...k (faculty). 5!=1*2*3*4*5=120 for example.
+>
 > So just use this and your sinustable-generator will work fine:
-> f(x)=x - x^3/6 + x^5/120 - x^7/5040 with x e [-pi;pi]
+>
+> `f(x)=x - x^3/6 + x^5/120 - x^7/5040` with `x` `[-pi;pi]`
 >
 > ## Extrapolation Using Trigonometrical Addition Theorems
 >
@@ -698,18 +703,17 @@ Sinetable Calculation v1.1, Sinustable calculations by Azure
 >
 > Trigonometric addition theorems:
 >
->  (1) cos(a+c) =cos(a)*cos(c) - sin(a)*sin(b)
->  (2) cos(a-c) =cos(a)*cos(c) + sin(a)*sin(b)
+>  (1) `cos(a+c) =cos(a)*cos(c) - sin(a)*sin(b)`
+>  (2) `cos(a-c) =cos(a)*cos(c) + sin(a)*sin(b)`
 >
 > forms into:
->  (3) sin(a)*sin(b) =cos(a-c) - cos(a)*cos(c)
+>  (3) `sin(a)*sin(b) =cos(a-c) - cos(a)*cos(c)`
 > 
-> inserting 3) into 1) gives the final equation:
-> cos(a+c) =2*cos(a)*cos(c) - cos(a-c)
+> inserting 3) into 1) gives the final equation: `cos(a+c) =2*cos(a)*cos(c) - cos(a-c)`
 >
 > This equation makes recursive sinustable calculation possible. how ? easy:
 >
-> f(x)=2*const*f(x-1) - f(x-2)
+> `f(x)=2*const*f(x-1) - f(x-2)`
 > 
 > So everything we need now are the first two values of the sinus (cosinus) list. f(0)=cos(0)=1 and f(1)=cos(c). Also the constant const is needed. It is const=cos(c)=f(1)."c" is the stepwidth of the sinus-list.
 >
@@ -721,31 +725,30 @@ Sinetable Calculation v1.1, Sinustable calculations by Azure
 > 
 > Here is the derivation:
 > 
-> Assumption:
-> f(x+d)=f(x)+d*f'(x) with d>0
+> Assumption: `f(x+d)=f(x)+d*f'(x)` with `d>0`
 >
 > This isnt mathematically 100% correct, it is only an approximation. But still accurate enough for our purposes - and quite handy.
 > 
 > Since we want to calculate sinus we set:f(x)=sin(x) d is the stepwidth of the sinus table we want to generate.
 >
-> sin(x+d)=sin(x)+d*cos(x)
+> `sin(x+d)=sin(x)+d*cos(x)`
 >
 > we derive the whole equation and multiply with d:
 >
-> d*cos(x+d)=d*cos(x)-d*d*sin(x)
+> `d*cos(x+d)=d*cos(x)-d*d*sin(x)`
 >
-> 1) sin(x+d) = sin(x) + d*cos(x)
-> 2) d*cos(x+d) =d*cos(x) - d*d*sin(x)
+> 1) `sin(x+d) = sin(x) + d*cos(x)`
+> 2) `d*cos(x+d) =d*cos(x) - d*d*sin(x)`
 >
 > now we have got two equations, which complete each other to a recursive function to calculate sinus.
 > 
-> a' = a + b
-> b' = b - a*d^2
+> `a' = a + b`
+> `b' = b - a*d^2`
 >
 > Fixed version: (read below)
 > 
-> a' = a + b
-> b' = b - d^2*a'
+> `a' = a + b`
+> `b' = b - d^2*a'`
 >
 > The starting value of a is: sin(0)=0
 > 
@@ -761,25 +764,23 @@ btw. this calculation can also be applied to a 2d-array with some additional blu
 >
 > Assumption:
 >
-> f(x+d)=f(x)+d*f'(x)
-> 
-> f'(x+d)=f'(x)+d*f''(x) with d>0
+> * `f(x+d)=f(x)+d*f'(x)`
+> * `f'(x+d)=f'(x)+d*f''(x) with d>0`
 >
 > Now we set: f(x)=sin(x) - thus f'(x)=cos(x) and f''(x)=-sin(x). Using this facts we can change the equations a bit.
 >
-> f(x+d)=f(x)+d*f'(x)
-> 
-> f'(x+d)=f'(x)-d*f(x)
+> * `f(x+d)=f(x)+d*f'(x)`
+> * `f'(x+d)=f'(x)-d*f(x)`
 >
 > This gives us a nice recursive formula calculating both sin(x)=f(x) and cos(x)=f'(x):
 >
-> a' = a + d * b
-> b' = b - d *a
+> * `a' = a + d * b`
+> * `b' = b - d *a`
 > 
 > Fixed version: (read below)
 >
-> a' = a + d * b
-> b' = b - d *a'
+> * `a' = a + d * b`
+> * `b' = b - d *a'`
 >
 > The starting value of a is: sin(0)=0
 > The starting value of b is: cos(0)=1
@@ -789,14 +790,15 @@ btw. this calculation can also be applied to a 2d-array with some additional blu
 > 
 > This is a little additional tweak to improve the accuracy of the last two approaches.
 > Lets start :
-> a' = a + b*d
-> b' = b - d*a
+> * `a' = a + b*d`
+> * `b' = b - d*a`
+>
 > associated matrix (A) is:
 >
-> | 1 -d | = A
-> | d 1 |
+> * `| 1 -d | = A`
+> * `| d 1 |`
 >
-> Det(A)= 1 + d^2
+> `Det(A)= 1 + d^2`
 > 
 > now...we expected an orthogonal matrix, that have determinant equal to 1 or -1.
 > 
@@ -804,26 +806,26 @@ btw. this calculation can also be applied to a 2d-array with some additional blu
 > 
 > Now, i rewrote A, with a little correction:
 >
-> | 1 d | = A
-> | -d (1-d^2) |
+> * `| 1 d | = A`
+> * `| -d (1-d^2) |`
 >
-> Det(A) = 1 - d^2 +d^2 = 1
+> `Det(A) = 1 - d^2 +d^2 = 1`
 >
 > OK..now the matrix is (real) correct, but what about new formulas?
 >
-> a' = a + b*d
-> b' = -d*a + b - b*d^2
+> * `a' = a + b*d`
+> * `b' = -d*a + b - b*d^2`
 >
 > AHHH..new ones are quite odd!
 >
 > But, let try to substitute a' instead a in OLD b' formula:
 >
-> b' = -d*a + b - b*d^2
+> * `b' = -d*a + b - b*d^2`
 > 
 > WOW! exactly like new b' calculus, then we have:
 > 
-> a' = a + b*d
-> b' = b - a'*d
+> * `a' = a + b*d`
+> * `b' = b - a'*d`
 >
 
 ## Linux and Development
