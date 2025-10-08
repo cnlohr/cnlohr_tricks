@@ -660,6 +660,43 @@ int main()
 
 This has been codified into a Google Sheets worksheet, [here](https://docs.google.com/spreadsheets/d/1uEJZy0o2NloHmxJm_240LDxhiuzhst_ewG1keyGCG-A/edit?usp=sharing)
 
+## Willmore's complex rotation
+
+You can instead convert your sin/cos into a complex number and use complex multiplication to rotate it.  The nice part about this is you get a very clean sin and cos output and it is pretty stable numerically.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define FRACT 8
+
+typedef struct {
+        float r,i;
+} cpl;
+
+cpl cmul(cpl a, cpl b){
+        cpl rval;
+        rval.r = a.r * b.r - a.i * b.i;
+        rval.i = a.r * b.i + a.i * b.r;
+        return rval;
+}
+
+void main(){
+        cpl a,b;
+
+        a.r = 1;
+        a.i = 0;
+        b.r = cosf(M_PI / FRACT / 2);
+        b.i = sinf(M_PI / FRACT / 2);
+        for(int i=0; i < FRACT; i++){
+                a = cmul(a, b);
+                printf("%f, %f\n", a.r, a.i);
+        }
+        exit(0);
+}
+```
+
 ## Sources for clever sinusoidal calculations
 
 Someone pointed out the webstite here: https://amycoders.org/tutorials/sintables.html
