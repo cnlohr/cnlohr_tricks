@@ -1028,6 +1028,11 @@ And they typically have much better current carrying + lower ESR.
 
 Find your specific capacitor [here](https://www.samsungsem.com/resources/file/global/support/product_catalog/MLCC.pdf), to get all the data on it.  While this link is for Samsung, most capacitor manufacturers have similar properties.
 
+
+Even within a given size, and capcitance there can be a huge difference in performance...
+
+<img width="1623" height="1163" alt="image" src="https://github.com/user-attachments/assets/a4c80d4b-41c9-42b5-8a6c-860e57d13e8e" />
+
 ## LED's forward voltage changes depending on current and temperature
 
 From this execellent presentation, [here](https://www.ti.com/lit/an/slvaeb5/slvaeb5.pdf?ts=1729743467093), you can use the Vf of an LED to roughly determine its junction (and possibly by extension die) temperature.  For fun and safety. 🤓
@@ -1036,6 +1041,3 @@ From this execellent presentation, [here](https://www.ti.com/lit/an/slvaeb5/slva
 
 ![https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true)
 
-Even within a given size, and capcitance there can be a huge difference in performance...
-
-<img width="1623" height="1163" alt="image" src="https://github.com/user-attachments/assets/a4c80d4b-41c9-42b5-8a6c-860e57d13e8e" />
