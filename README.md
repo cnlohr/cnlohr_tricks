@@ -1036,3 +1036,6 @@ From this execellent presentation, [here](https://www.ti.com/lit/an/slvaeb5/slva
 
 ![https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true)
 
+Even within a given size, and capcitance there can be a huge difference in performance...
+
+<img width="1623" height="1163" alt="image" src="https://github.com/user-attachments/assets/a4c80d4b-41c9-42b5-8a6c-860e57d13e8e" />
