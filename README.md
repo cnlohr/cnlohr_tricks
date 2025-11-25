@@ -1041,3 +1041,12 @@ From this execellent presentation, [here](https://www.ti.com/lit/an/slvaeb5/slva
 
 ![https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true](https://github.com/cnlohr/cnlohr_tricks/blob/master/media/LEDTemperatureCurrentGraph.png?raw=true)
 
+## MLCC aging
+
+When you use bigger MLCC caps, like X5R, Y5V, etc.  The capacitance changes over time.
+
+<img width="350" height="217" alt="G6oADPNbwAUZD2b" src="https://github.com/user-attachments/assets/34ad3e0c-79a2-442e-90d1-876342840eff" />
+
+Be careful.
+
+
