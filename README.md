@@ -108,6 +108,17 @@ Threading can happen anywhere from 1 to 9 depending on your use case, for instan
 
 1. Try to use native sizes for parameters instead of the smallest type where reasonable.  For instance, on many architectures using `uint8_t` paramters instead of `int` will frequently result in larger binaries and no benefit, because to use `uint8_t` it must mask off bits.
 
+#### When your code explodes and you don't know why (under different optimization levels)
+
+1. Try running in `valgrind` fixing all previous errors.
+2. Try turning on allll warnings `-Wall -Wextra -pedantic`
+3. Use the address sanitizer `-fsanitize=address,undefined`
+4. See if your behaviour changes when you use `-fno-strict-aliasing`
+
+(It's always strict aliasing UB (undefined behaviour), look up type punning)
+
+It's important to note that both GCC and Clang, when seeing UB will sometimes optimize code away that they really should not.  It can be tricky to see when they trigger UB checks.
+
 ### Two's complement
 
 All modern comptuers store numbers in [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
