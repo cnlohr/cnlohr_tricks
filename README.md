@@ -114,11 +114,53 @@ Threading can happen anywhere from 1 to 9 depending on your use case, for instan
 2. Try turning on allll warnings `-Wall -Wextra -pedantic`
 3. Use the address sanitizer `-fsanitize=address,undefined`
 4. See if your behaviour changes when you use `-fno-strict-aliasing`
+5. You can see if your compiler has `-fsanitize=type`
 
 (It's always strict aliasing UB (undefined behaviour), look up type punning)
 
 It's important to note that both GCC and Clang, when seeing UB will sometimes optimize code away that they really should not.  It can be tricky to see when they trigger UB checks.
 
+If it is type punning there are two approaches that _might_ work.
+
+You can try using this macro to pun types in a safe way.
+```c
+#define RBTREEPUN(to, from, value) \
+	 ((union { \
+		 to x; \
+		 from y; \
+	 }){.y = value}).x
+```
+
+Or you can in a more secure way use type unions to force acceptable behaviour. 
+
+```c
+typedef struct
+{
+	int a;
+	int b;
+} my_base_thing;
+
+typedef union
+{ \
+		my_base_thing g; 
+		struct {
+			int a;
+			int b;
+			int c;
+		}
+} my_abstracted_thing; \
+```
+And you can safely say:
+
+```c
+my_abstracted_thing * a = (my_abstracted_thing*)s;
+a->c;
+```
+
+or typecast back with:
+```c
+my_base_thing * b = &a->g;
+```
 ### Two's complement
 
 All modern comptuers store numbers in [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement).  Basically for unsigned numbers, you can binary count up.
