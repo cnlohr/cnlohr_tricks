@@ -953,6 +953,13 @@ To detach from inside a screen, `ctrl+a` then `ctrl+x`, to exit, `ctrl+a` then `
 
 To re-attach to a screen that is running use `screen -x` - if there are multiple screens, you can use `screen -x screen_name` note that you can partial match `screen_name`
 
+### I want to see the thread priorities of the threads on my processes and filter by a name
+
+gotchufam
+```sh
+ps -a -T -e -o pid,tid,cls,rtprio,pri,nice,pcpu,comm,cmd | grep what_to_filter_by
+```
+
 ### I want to get a raw deflate (zlib but without the header) file.  How do I do that?
 
 ```sh
