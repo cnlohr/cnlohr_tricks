@@ -1000,6 +1000,15 @@ Make a folder and do:
 pdfimages -all slvaeb5.pdf /tmp/images/
 ```
 
+### FFMPEG
+
+#### Splitting a video and audio into separate files (And merging)
+
+```sh
+ffmpeg -i input_file.mp4 -an -c:v copy video-noaudio.mp4 -vn -c:a copy audioout.mp4
+ffmpeg -i video.m4a -i video-noaudio.mp4 -c:v copy -c:a copy -map 0 -map 1 new_audio.mp4
+```
+
 ### How do I Makefile?
 
 A basic Makefile would be:
