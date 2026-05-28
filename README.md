@@ -1000,6 +1000,19 @@ Make a folder and do:
 pdfimages -all slvaeb5.pdf /tmp/images/
 ```
 
+### I want to back up all of my github repositories
+
+```sh
+#!/bin/bash
+
+gh repo list ####### --limit 4000 | while read -r repo _; do
+  gh repo clone "$repo" "$repo" -- --recurse-submodules
+done
+```
+
+Replace ###### with your github username.
+
+
 ### FFMPEG
 
 #### Splitting a video and audio into separate files (And merging)
