@@ -1104,7 +1104,7 @@ Owen the programmer has a really neat guide on how to do lots of cool stuff with
 
 edit as needed
 ```
-kikit panelize --layout 'grid; rows: 5; cols: 3; hspace:2mm' --tabs 'fixed; vcount: 1; hcount: 0' --cuts 'vcuts; layer: User.1' --framing 'railstb; width: 6mm; fillet: 2mm' --tooling '3hole; hoffset: 3mm; voffset: 2.5mm; size: 2mm' --fiducials '3fid; hoffset: 7mm; voffset: 2.5mm; coppersize: 3mm; opening: 1.5mm' --post 'millradius: 0.6mm' --text 'simple; text: Panel made on: {date} .; anchor: mt; voffset: 2.5mm; hjustify: center; vjustify:center' ./#######.kicad_pcb ./########_penal.kicad_pcb
+kikit panelize --layout 'grid; rows: 5; cols: 3; hspace:2mm' --tabs 'fixed; vcount: 1; hcount: 0' --cuts 'vcuts; layer: User.1' --framing 'railstb; width: 6mm; fillet: 2mm' --tooling '3hole; hoffset: 3mm; voffset: 2.5mm; size: 2mm' --fiducials '3fid; hoffset: 7mm; voffset: 2.5mm; coppersize: 3mm; opening: 1.5mm' --post 'millradius: 0.6mm' --text 'simple; text: Panel made on: {date} .; anchor: mt; voffset: 2.5mm; hjustify: center; vjustify:center' ./#######.kicad_pcb ./########_panel.kicad_pcb
 ```
 
 ## Why use bigger capacitors in lieu of smaller MLCC's?
