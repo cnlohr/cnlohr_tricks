@@ -1142,4 +1142,55 @@ When you use bigger MLCC caps, like X5R, Y5V, etc.  The capacitance changes over
 
 Be careful.
 
+## Making PCBs
+
+1. Ingredients:
+   a. Use Riston.
+   b. Utility Sink
+   c. 1.6mm Copper Clad
+   d. Sodium Carbonate (Pool pH Balancer)
+   e. Potassium or Sodium Hydroxide (doesn't matter which)
+   f. Ferric Chloride Liquid (from MG Chemicals)
+   g. Glass container big enough for PCBs.
+   h. Laser printed transparencies.
+   i. Appropriate PPE.
+   j. Laminator
+   k. Tweezers to peel off film.
+   l. 3-in-1 oil.
+   m. 50W 380nm LED With focusing Lens and power supply to go with.
+3. Clean copper clad with steel wool. And/or Acetone.  Steel wool, if totally clean is really nice.
+4. Peel back off Riston.
+5. Use COLD water between Riston and copper clad.  If warm, Riston will stick.
+6. Apply Riston to copper clad with no gloves on.
+7. Leave a thin film of water.
+8. Put through laminator.
+9. Peel off Plastic (TODO: try without peeling off)
+10. Put 3-in-1 oil on Riston top.
+11. Put FLIPPED, INVERTED diagram on, ink-down
+12. Blast for 30 seconds with my 50W UV 380nm led at about 1' with focusing lens.
+13. Draw WARM water in bowl with Sodium Carbonate. About 1 tbsp per 1/4 litre
+14. Put PCB in, gently massage with fingers til fully etched.
+15. Draw HOT water bath, put 1/4 litre Ferric Chloride in glass container.
+16. Put glass container in bath, and PCB in ferric chloride.
+17. Ferric Chloride should get warm.
+18. Mild rub over surface, but focus on gently rocking the bath back and forth.  
+19. When fully etched, remove PCB.
+20. Put Waste Ferric Chloride into separate container.  Do not pour down drain.
+21. Put Potassium/Sodium Hydroxide in glass container (about 1tbsp per 1/4 liter HOT water)
+22. Put PCB in container with the Hydroxide.
+23. Rub PCB gently, until all riston falls off.
+24. Rinse PCB.
+25. Neutralize residual Ferric Chloride waste with Potassium/Sodium Hydroxide mixture.
+26. Drain water from basin.
+27. Peel film solder mask
+28. COLD water on PCB, apply solder mask film.
+29. Laminate solder mask.
+30. Peel off front of solder mask film.
+31. Debatable: 3-in-1 oil, or water on top of film.  Need to rub film to make it less sticky.  Should not peel first???
+32. Blast for 30 seconds with 50 W UV 380nm LED at about 1' with focusing lens.
+33. Remove transparency.
+34. Draw warm water into glass container with Sodium Carbonate 1tbsp per 1/4 litre
+35. Put PCB in container, gently rub.
+36. Rinse thoroughly when developed. 
+37. Blast with 30 seconds with 50W UV 380nm LED again.
 
