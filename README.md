@@ -441,7 +441,9 @@ int apsqrt( int i )
 	if( i == 0 ) return 0;
 	int x = 1<<( ( 32 - __builtin_clz(i) )/2);
 	x = (x + i/x)/2;
-//	x = (x + i/x)/2; //May be needed depending on how precise you want. (Below graph is without this line)
+	x = (x + i/x)/2;
+//	x = (x + i/x)/2; //May be needed depending on how precise you want. (Below graph is without this line or line above)
+	// All 3 bring you to code accurate within 1 code value for all of uint32_t
 	return x;
 }
 ```
